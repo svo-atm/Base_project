@@ -31,7 +31,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: AK_base_linux_port.Debug
+            - project-context: TinyLlama2_app.Debug
           debugger:
             name: AVH-FVP
             model: set model executable as target-set.debugger.model in csolution.yml
@@ -51,4 +51,5 @@ solution:
   # List related projects.
   projects:
     - project: AK_base_linux_port/AK_base_linux_port.cproject.yml
+    - project: TinyLlama2_app/TinyLlama2_app.cproject.yml
   compiler: GCC

@@ -1,0 +1,48 @@
+# TinyLlama2 Model Configuration
+# This file defines the model architecture and parameters
+
+model:
+  name: "TinyLlama2-Embedded"
+  version: "1.0.0"
+  target_platform: "ARM Cortex-M55"
+  
+architecture:
+  vocab_size: 32000
+  max_seq_len: 512
+  dim: 288
+  n_layers: 6
+  n_heads: 6
+  n_kv_heads: 6
+  head_size: 48  # dim / n_heads
+  hidden_dim: 768
+  rope_theta: 10000.0
+
+optimization:
+  quantization: "FP32"  # Can be changed to INT8/INT4 for further optimization
+  memory_layout: "static"
+  use_cmsis_dsp: true
+  fpu_optimization: true
+
+memory_requirements:
+  model_weights: "~2.5MB"  # Estimated for FP32
+  runtime_state: "~512KB"
+  total_ram: "~3MB"
+  flash_storage: "~4MB"
+
+performance:
+  target_tokens_per_second: 10
+  latency_per_token: "~100ms"
+  power_consumption: "Low"
+
+features:
+  - "Real-time inference"
+  - "CMSIS-DSP acceleration" 
+  - "Hardware monitoring integration"
+  - "Interactive demo mode"
+  - "Memory-efficient attention"
+  - "Custom math optimizations"
+
+deployment:
+  format: "ELF binary"
+  debug_support: true
+  profiling_enabled: true

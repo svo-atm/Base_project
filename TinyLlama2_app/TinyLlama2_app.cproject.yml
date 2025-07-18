@@ -1,0 +1,47 @@
+# TinyLlama2 inference application project
+project:
+
+  groups:
+    - group: Source Files
+      files:
+        - file: ./main.c
+        - file: ./tinyllama2.c
+        - file: ./transformer.c
+        - file: ./tokenizer.c
+        - file: ./utils.c
+    - group: Header Files
+      files:
+        - file: ./tinyllama2.h
+        - file: ./transformer.h
+        - file: ./tokenizer.h
+        - file: ./utils.h
+    - group: Model Data
+      files:
+        - file: ./model_weights.c
+
+  # List components to use for your application.
+  # A software component is a re-usable unit that may be configurable.
+  components:
+    - component: CMSIS:CORE
+    - component: Device:Startup&C Startup
+    - component: ARM::CMSIS Driver:USART
+      instances: 2
+    - component: ARM::Device:USART Retarget
+    - component: ARM::CMSIS-Compiler:STDOUT:Custom
+    - component: ARM::CMSIS-Compiler:CORE
+    - component: Device:Native Driver:UART
+    - component: ARM::Device:Definition
+    - component: ARM::Device:Native Driver:IO
+
+  # List executable file formats to be generated.
+  output:
+    type:
+      - elf
+      - hex
+      - map
+
+  packs:
+    - pack: ARM::CMSIS
+    - pack: ARM::SSE_320_BSP
+    - pack: ARM::CMSIS-Compiler
+    - pack: ARM::CMSIS-DSP

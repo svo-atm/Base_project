@@ -2,9 +2,39 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build TinyLlama2 App",
+            "type": "shell",
+            "command": "cbuild",
+            "args": [
+                "TinyLlama2_app/TinyLlama2_app.cproject.yml",
+                "--context",
+                ".Debug+SSE-320-FVP"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Build TinyLlama2 application for ARM Cortex-M55"
+        },
+        {
+            "label": "Build All Projects",
+            "type": "shell",
+            "command": "cbuild",
+            "args": [
+                "Base_solution.csolution.yml"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Build all projects in the solution"
+        },
+        {
             "label": "CMSIS Load+Run",
             "type": "shell",
-            "command": "/opt/vlsi/arm/tools/FVP_Corstone_SSE-320/models/Linux64_GCC-9.3/FVP_Corstone_SSE-320",
+            "command": "set model executable as target-set.debugger.model in csolution.yml",
             "options": {
                 "cwd": "${workspaceFolder}/"
             },
@@ -40,10 +70,9 @@
                 }
             },
             "args": [
-                "-C", "mps4_board.subsystem.ethosu.num_macs=1024", 
-                "-C", "mps4_board.visualisation.disable-visualisation=1", 
-                //"-C", "vis_hdlcd.disable_visualisation=1",
-                "${command:arm-debugger.getApplicationFile}"
+                "-a",
+                "out/TinyLlama2_app/SSE-320-FVP/Debug/TinyLlama2_app.elf",
+                ""
             ],
             "problemMatcher": []
         }

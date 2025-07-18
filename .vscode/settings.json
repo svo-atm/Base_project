@@ -1,6 +1,6 @@
 {
     "clangd.arguments": [
-        "--compile-commands-dir=/mnt/hdd/huy_share/Base_solution/out/AK_base_linux_port/SSE-320-FVP/Debug"
+        "--compile-commands-dir=/Users/tramyho/Work/FPTtelecom/Base_project/out/TinyLlama2_app/SSE-320-FVP/Debug"
     ],
     "debug.hideSlowPreLaunchWarning": true,
     "files.associations": {
