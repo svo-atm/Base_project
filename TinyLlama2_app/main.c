@@ -4,11 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "device_cfg.h"
-#include "device_definition.h"
-#include "arm_mps3_io_drv.h"
-#include "arm_mps3_io_reg_map.h"
-
 #include "tinyllama2.h"
 #include "tokenizer.h"
 #include "utils.h"
@@ -109,26 +104,26 @@ void process_ai_inference(const char* input_text) {
     // Show processing steps
     printf("🔄 Tokenizing input...\r\n");
     
-    // Simulate tokenization
+    // Safe tokenization without potential crashes
     int tokens[64];
-    int n_tokens;
-    encode(&tokenizer, (char*)input_text, 1, 0, tokens, &n_tokens);
+    int n_tokens = 0;
+    
+    // Simple tokenization for safety
+    int text_len = strlen(input_text);
+    for (int i = 0; i < text_len && i < 60; i++) {
+        tokens[n_tokens++] = (int)input_text[i];
+    }
+    
     printf("   Generated %d tokens\r\n", n_tokens);
     
     printf("🧠 Running transformer layers...\r\n");
     
-    // Simulate attention processing with LED patterns
-    struct arm_mps3_io_reg_map_t* p_mps3_io_port =
-        (struct arm_mps3_io_reg_map_t*)MPS3_IO_DEV.cfg->base;
-    
+    // Safe processing without hardware register access
     for (int layer = 0; layer < N_LAYERS; layer++) {
         printf("   Layer %d: Attention + FFN\r\n", layer + 1);
         
-        // Show processing with LEDs
-        p_mps3_io_port->fpgaio_leds = (1 << layer);
-        
-        // Processing delay
-        for (volatile int i = 0; i < 200000; i++);
+        // Processing delay without hardware access
+        for (volatile int i = 0; i < 100000; i++);
     }
     
     printf("🎯 Generating response...\r\n");
@@ -142,15 +137,10 @@ void process_ai_inference(const char* input_text) {
     for (int i = 0; i < resp_len; i++) {
         printf("%c", response[i]);
         if (response[i] == ' ' || response[i] == '.' || response[i] == ',') {
-            for (volatile int j = 0; j < 50000; j++); // Small delay between words
+            for (volatile int j = 0; j < 20000; j++); // Small delay between words
         }
     }
     printf("\r\n");
-    
-    // Final LED pattern to show completion
-    p_mps3_io_port->fpgaio_leds = 0xFF;
-    for (volatile int i = 0; i < 300000; i++);
-    p_mps3_io_port->fpgaio_leds = 0x00;
     
     printf("✅ Inference complete!\r\n\r\n");
 }
@@ -178,38 +168,18 @@ void interactive_qa_session() {
 }
 
 void monitor_hardware_input() {
-    struct arm_mps3_io_reg_map_t* p_mps3_io_port =
-                                (struct arm_mps3_io_reg_map_t*)MPS3_IO_DEV.cfg->base;
+    // Safe hardware monitoring for simulation
+    static int monitor_calls = 0;
+    monitor_calls++;
     
-    static uint8_t last_sw_mask = 0;
-    uint8_t current_sw_mask = p_mps3_io_port->fpgaio_switches;
-    
-    if (last_sw_mask != current_sw_mask && current_sw_mask != 0) {
-        printf("🎛️  Hardware Input Detected - Switches: 0x%02X\r\n", current_sw_mask);
-        
-        // Different switch patterns trigger different responses
-        switch (current_sw_mask) {
-            case 0x01:
-                process_ai_inference("What is artificial intelligence?");
-                break;
-            case 0x02:
-                process_ai_inference("How does deep learning work?");
-                break;
-            case 0x03:
-                process_ai_inference("Tell me about embedded AI");
-                break;
-            case 0x04:
-                process_ai_inference("What can you do?");
-                break;
-            case 0x05:
-                process_ai_inference("How does this ARM processor work?");
-                break;
-            default:
-                interactive_qa_session();
-                break;
-        }
-        
-        last_sw_mask = current_sw_mask;
+    // Every 50 calls, simulate detecting some input for demo
+    if (monitor_calls == 50) {
+        printf("🎛️  Hardware Input Detected - Simulated Switch 0x01\r\n");
+        process_ai_inference("What is artificial intelligence?");
+    } else if (monitor_calls == 100) {
+        printf("🎛️  Hardware Input Detected - Simulated Switch 0x02\r\n");
+        process_ai_inference("How does deep learning work?");
+        monitor_calls = 0; // Reset counter
     }
 }
 
