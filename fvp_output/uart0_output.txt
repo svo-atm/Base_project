@@ -1,0 +1,31 @@
+
+🚀 ================================================
+🤖      TinyLlama2 Intelligent Q&A System       
+🧠         ARM Cortex-M55 Edge AI Demo          
+🚀 ================================================
+💡 System: ARM Cortex-M55 with CMSIS-DSP
+🎯 Features: Real-time AI question answering
+⚡ Memory: Optimized for embedded deployment
+🎛️  Control: Use switches to ask different questions
+🚀 ================================================
+
+🔧 Initializing TinyLlama2 AI Model...
+Loading model configuration...
+- Vocabulary size: 1000
+- Model dimension: 64
+- Number of layers: 3
+- Number of heads: 4
+Allocating runtime state...
+Runtime state allocated successfully
+✅ Transformer model loaded successfully
+Building tokenizer with vocab size: 1000
+Tokenizer initialized successfully
+✅ Tokenizer initialized successfully
+🧠 Neural network layers: 3
+🎯 Attention heads: 4
+� Model dimension: 64
+�📝 Vocabulary size: 1000
+⚡ Optimized for embedded deployment
+🚀 Model ready for intelligent conversations!
+
+🎉 Welcome Demo:

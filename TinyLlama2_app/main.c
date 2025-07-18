@@ -256,7 +256,13 @@ int main() {
     printf("🎉 Welcome Demo:\r\n");
     process_ai_inference("Hello, what can you tell me about AI?");
     
-    printf("🎛️  Switch Controls:\r\n");
+    // Run a few more demos automatically for simulation
+    printf("🎛️  Auto-demo mode for simulation:\r\n");
+    process_ai_inference("What is machine learning?");
+    process_ai_inference("How does embedded AI work?");
+    process_ai_inference("Tell me about ARM processors");
+    
+    printf("🎛️  Switch Controls (for interactive use):\r\n");
     printf("   0x01 - Ask about AI\r\n");
     printf("   0x02 - Ask about deep learning\r\n");
     printf("   0x03 - Ask about embedded AI\r\n");
@@ -264,12 +270,36 @@ int main() {
     printf("   0x05 - Ask about ARM processors\r\n");
     printf("   Other - Interactive Q&A session\r\n\r\n");
     
-    // Main interaction loop
+    // Main interaction loop (limited for simulation)
+    int demo_count = 0;
+    const int max_demo_cycles = 10; // Limit for simulation
+    
     for (;;) {
         monitor_hardware_input();
         
+        // Auto-trigger demos in simulation mode
+        if (demo_count < max_demo_cycles) {
+            // Simulate some switch changes for demo
+            if (demo_count % 3 == 0) {
+                printf("🎮 Simulation: Auto-triggering demo %d\r\n", demo_count + 1);
+                const char* demo_questions[] = {
+                    "What is deep learning?",
+                    "How does computer vision work?",
+                    "What can you do?"
+                };
+                process_ai_inference(demo_questions[demo_count % 3]);
+            }
+            demo_count++;
+        }
+        
         // Small delay to prevent overwhelming the system
         for (volatile int i = 0; i < 100000; i++);
+        
+        // Exit after demos for simulation
+        if (demo_count >= max_demo_cycles) {
+            printf("🏁 Simulation demo complete. System ready for interactive use.\r\n");
+            break;
+        }
     }
     
     return 0;

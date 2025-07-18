@@ -1,0 +1,10 @@
+
+--- Corstone_SSE_320_Main statistics: -----------------------------------------
+Simulated time                          : 300.000000s
+User time                               : 13.053475s
+System time                             : 0.003837s
+Wall time                               : 13.055608s
+Performance index                       : 22.98
+mps4_board.subsystem.cpu0               : 574.47 MIPS (  7500001412 Inst)
+Memory highwater mark                   : 0x14827000 bytes ( 0.320 GB )
+-------------------------------------------------------------------------------

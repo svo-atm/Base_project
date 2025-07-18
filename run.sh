@@ -10,7 +10,7 @@ FVP_PATH="/mnt/hdd/stuart_data/fvp/bin/models/Linux64_GCC-9.3/FVP_Corstone_SSE-3
 # AXF_FILE="out/object-detection/AVH-SSE-320-U85/Debug/object-detection.axf"
 # AXF_FILE="out/bin/ethos-u-object_detection.axf"
 AXF_FILE="out/TinyLlama2_app/SSE-320-FVP/Debug/TinyLlama2_app.elf"
-SIM_LIMIT="${1:-300}"  # Default 300 cycles, can be overridden
+SIM_LIMIT="${1:-3000}"  # Increased from 300 to 3000 cycles for AI processing
 OUTPUT_DIR="fvp_output"
 
 # Create output directory
@@ -45,7 +45,7 @@ FVP_PID=$!
 echo "FVP started with PID: $FVP_PID"
 
 # Monitor FVP execution
-TIMEOUT=60  # 60 seconds timeout
+TIMEOUT=120  # Increased to 120 seconds timeout for AI processing
 COUNT=0
 while kill -0 $FVP_PID 2>/dev/null && [ $COUNT -lt $TIMEOUT ]; do
     echo -n "."
