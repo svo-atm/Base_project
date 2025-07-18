@@ -1,0 +1,13 @@
+{
+    "clangd.arguments": [
+        "--compile-commands-dir=/mnt/hdd/huy_share/Base_solution/out/AK_base_linux_port/SSE-320-FVP/Debug"
+    ],
+    "debug.hideSlowPreLaunchWarning": true,
+    "files.associations": {
+        "random": "c",
+        "freertos.h": "c"
+    },
+    "yaml.schemas": {
+        "file:///home/fpt-remote2/.vscode/extensions/arm.cmsis-csolution-1.56.0-linux-x64/tools/cmsis-toolbox/etc/csolution.schema.json": "file:///mnt/hdd/huy_workspace/Base_solution/Base_solution.csolution.yml"
+    },
+}

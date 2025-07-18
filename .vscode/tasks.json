@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMSIS Load+Run",
+            "type": "shell",
+            "command": "/opt/vlsi/arm/tools/FVP_Corstone_SSE-320/models/Linux64_GCC-9.3/FVP_Corstone_SSE-320",
+            "options": {
+                "cwd": "${workspaceFolder}/"
+            },
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "cmd.exe",
+                        "args": [
+                            "/d",
+                            "/c"
+                        ]
+                    }
+                }
+            },
+            "linux": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "osx": {
+                "options": {
+                    "shell": {
+                        "executable": "/bin/bash",
+                        "args": [
+                            "-c"
+                        ]
+                    }
+                }
+            },
+            "args": [
+                "-C", "mps4_board.subsystem.ethosu.num_macs=1024", 
+                "-C", "mps4_board.visualisation.disable-visualisation=1", 
+                //"-C", "vis_hdlcd.disable_visualisation=1",
+                "${command:arm-debugger.getApplicationFile}"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "SSE-320 Bare Metal Debug",
+            "type": "arm-debugger.configdb",
+            "request": "launch",
+            "cdbEntry": "Arm SubSystem FVP::Corstone SSE-320::Bare Metal Debug::Bare Metal Debug::Cortex-M85",
+            "programs": [
+                {
+                    "path": "${command:arm-debugger.getApplicationFile}"
+                }
+            ],
+            "runControl": {
+                "debugFromSymbol": "SystemInit"
+            },
+            "resetAfterConnect": true
+        }
+    ]
+}
