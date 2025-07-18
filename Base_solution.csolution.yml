@@ -31,7 +31,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: TinyLlama2_app.Debug
+            - project-context: AK_base_linux_port.Debug
           debugger:
             name: AVH-FVP
             model: set model executable as target-set.debugger.model in csolution.yml

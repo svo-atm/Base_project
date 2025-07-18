@@ -71,7 +71,7 @@
             },
             "args": [
                 "-a",
-                "out/TinyLlama2_app/SSE-320-FVP/Debug/TinyLlama2_app.elf",
+                "out/AK_base_linux_port/SSE-320-FVP/Debug/AK_base_linux_port.elf",
                 ""
             ],
             "problemMatcher": []

@@ -4,15 +4,15 @@
 #include <stdint.h>
 #include <stddef.h>
 
-// Model configuration
-#define VOCAB_SIZE 32000
-#define MAX_SEQ_LEN 512
-#define DIM 288
-#define N_LAYERS 6
-#define N_HEADS 6
-#define N_KV_HEADS 6
+// Model configuration (reduced for embedded demo)
+#define VOCAB_SIZE 1000        // Reduced from 32000
+#define MAX_SEQ_LEN 64         // Reduced from 512
+#define DIM 64                 // Reduced from 288
+#define N_LAYERS 3             // Reduced from 6
+#define N_HEADS 4              // Reduced from 6
+#define N_KV_HEADS 4           // Reduced from 6
 #define HEAD_SIZE (DIM / N_HEADS)
-#define HIDDEN_DIM 768
+#define HIDDEN_DIM 128         // Reduced from 768
 
 // Model weights structure
 typedef struct {
