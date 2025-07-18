@@ -202,5 +202,3 @@ Build and run simple buttons and leds control:
 
 
 All ARM and CMSIS source codes are located in **/mnt/hdd/Vcpkg**.
-
-Base solution is located in **/mnt/hdd/Vcpkg**.
