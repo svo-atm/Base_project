@@ -30,7 +30,7 @@ static const QAEntry qa_database[] = {
     {"What is deep learning?", "Deep learning uses multi-layered neural networks to automatically learn complex patterns from large datasets."},
     {"Explain computer vision", "Computer vision enables machines to interpret and understand visual information from images and videos."},
     {"What is natural language processing?", "NLP helps computers understand, interpret, and generate human language in a meaningful way."},
-    {"How does this microcontroller work?", "This ARM Cortex-M55 runs at high efficiency with dedicated AI acceleration for edge computing applications."}
+    {"How does this microcontroller work?", "This ARM Cortex-M85 runs at high efficiency with dedicated AI acceleration for edge computing applications."}
 };
 
 #define QA_DATABASE_SIZE (sizeof(qa_database) / sizeof(QAEntry))
@@ -85,7 +85,7 @@ const char* find_response(const char* question) {
     
     // Default responses for common patterns
     if (strstr(normalized_question, "hello") || strstr(normalized_question, "hi")) {
-        return "Hello! I'm TinyLlama2 running on ARM Cortex-M55. Ask me about AI, machine learning, or embedded systems!";
+        return "Hello! I'm TinyLlama2 running on ARM Cortex-M85. Ask me about AI, machine learning, or embedded systems!";
     }
     if (strstr(normalized_question, "how are you") || strstr(normalized_question, "how do you do")) {
         return "I'm running efficiently on this microcontroller! My neural networks are processing at optimal performance.";
@@ -98,23 +98,36 @@ const char* find_response(const char* question) {
 }
 
 void process_ai_inference(const char* input_text) {
+    printf("DEBUG: Entered process_ai_inference\r\n");
+    printf("DEBUG: Input text: %s\r\n", input_text ? input_text : "NULL");
+    
     printf("\r\n🤖 TinyLlama2 Processing...\r\n");
     printf("📝 Input: %s\r\n", input_text);
     
+    printf("DEBUG: About to tokenize\r\n");
+    
     // Show processing steps
     printf("🔄 Tokenizing input...\r\n");
+    
+    printf("DEBUG: Creating token buffer\r\n");
     
     // Safe tokenization without potential crashes
     int tokens[64];
     int n_tokens = 0;
     
+    printf("DEBUG: Calculating text length\r\n");
+    
     // Simple tokenization for safety
     int text_len = strlen(input_text);
+    printf("DEBUG: Text length: %d\r\n", text_len);
+    
     for (int i = 0; i < text_len && i < 60; i++) {
         tokens[n_tokens++] = (int)input_text[i];
     }
     
     printf("   Generated %d tokens\r\n", n_tokens);
+    
+    printf("DEBUG: Starting transformer layers\r\n");
     
     printf("🧠 Running transformer layers...\r\n");
     
@@ -126,10 +139,14 @@ void process_ai_inference(const char* input_text) {
         for (volatile int i = 0; i < 100000; i++);
     }
     
+    printf("DEBUG: About to find response\r\n");
+    
     printf("🎯 Generating response...\r\n");
     
     // Get intelligent response
     const char* response = find_response(input_text);
+    
+    printf("DEBUG: Got response: %s\r\n", response ? response : "NULL");
     
     // Simulate word-by-word generation
     printf("💬 Response: ");
@@ -143,6 +160,7 @@ void process_ai_inference(const char* input_text) {
     printf("\r\n");
     
     printf("✅ Inference complete!\r\n\r\n");
+    printf("DEBUG: Exiting process_ai_inference\r\n");
 }
 
 void interactive_qa_session() {
@@ -190,9 +208,9 @@ int main() {
     printf("\r\n");
     printf("🚀 ================================================\r\n");
     printf("🤖      TinyLlama2 Intelligent Q&A System       \r\n");
-    printf("🧠         ARM Cortex-M55 Edge AI Demo          \r\n");
+    printf("🧠         ARM Cortex-M85 Edge AI Demo          \r\n");
     printf("🚀 ================================================\r\n");
-    printf("💡 System: ARM Cortex-M55 with CMSIS-DSP\r\n");
+    printf("💡 System: ARM Cortex-M85 with CMSIS-DSP\r\n");
     printf("🎯 Features: Real-time AI question answering\r\n");
     printf("⚡ Memory: Optimized for embedded deployment\r\n");
     printf("🎛️  Control: Use switches to ask different questions\r\n");
@@ -201,19 +219,27 @@ int main() {
     // Initialize AI model
     printf("🔧 Initializing TinyLlama2 AI Model...\r\n");
     
+    printf("DEBUG: About to initialize transformer\r\n");
+    
     // Initialize transformer
     if (build_transformer(&transformer, NULL) == 0) {
         printf("✅ Transformer model loaded successfully\r\n");
     } else {
         printf("❌ Failed to load transformer model\r\n");
+        return -1; // Exit if transformer fails
     }
+    
+    printf("DEBUG: About to initialize tokenizer\r\n");
     
     // Initialize tokenizer
     if (build_tokenizer(&tokenizer, NULL, VOCAB_SIZE) == 0) {
         printf("✅ Tokenizer initialized successfully\r\n");
     } else {
         printf("❌ Failed to initialize tokenizer\r\n");
+        return -1; // Exit if tokenizer fails
     }
+    
+    printf("DEBUG: Model initialization complete\r\n");
     
     printf("🧠 Neural network layers: %d\r\n", N_LAYERS);
     printf("🎯 Attention heads: %d\r\n", N_HEADS);
@@ -224,7 +250,9 @@ int main() {
     
     // Welcome demonstration
     printf("🎉 Welcome Demo:\r\n");
+    printf("DEBUG: About to call process_ai_inference\r\n");
     process_ai_inference("Hello, what can you tell me about AI?");
+    printf("DEBUG: Returned from process_ai_inference\r\n");
     
     // Run a few more demos automatically for simulation
     printf("🎛️  Auto-demo mode for simulation:\r\n");
